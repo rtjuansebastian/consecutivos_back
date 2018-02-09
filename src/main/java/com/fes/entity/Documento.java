@@ -30,18 +30,22 @@ public class Documento implements Serializable {
 	@Column(name = "fecha")
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
+	
+	@Column(name="consecutivo")
+	private int consecutivo;
 
 	public Documento() {
 
 	}
 
-	public Documento(int id, Usuario usuario, TipoDocumento tipoDocumento, String nombre, Date fecha) {
+	public Documento(int id, Usuario usuario, TipoDocumento tipoDocumento, String nombre, Date fecha, int consecutivo) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
 		this.tipoDocumento = tipoDocumento;
 		this.nombre = nombre;
 		this.fecha = fecha;
+		this.consecutivo = consecutivo;
 	}
 
 	public int getId() {
@@ -82,6 +86,14 @@ public class Documento implements Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public int getConsecutivo() {
+		return consecutivo;
+	}
+
+	public void setConsecutivo(int consecutivo) {
+		this.consecutivo = consecutivo;
 	}
 
 }

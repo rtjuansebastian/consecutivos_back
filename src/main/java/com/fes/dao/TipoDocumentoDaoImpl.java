@@ -43,6 +43,7 @@ public class TipoDocumentoDaoImpl implements TipoDocumentoDao{
 		TipoDocumento tipoDoc=find(tipoDocumento.getId());
 		tipoDoc.setNombre(tipoDocumento.getNombre());
 		tipoDoc.setSiglas(tipoDocumento.getSiglas());
+		tipoDoc.setIndividual(tipoDocumento.isIndividual());
 		entityManager.flush();
 		
 		return tipoDoc;

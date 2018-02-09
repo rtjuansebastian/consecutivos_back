@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fes.entity.Documento;
+import com.fes.entity.TipoDocumento;
 
 @Transactional
 @Repository
@@ -25,7 +26,19 @@ public class DocumentoDaoImpl implements DocumentoDao{
 
 	@Override
 	public void create(Documento documento) {
-
+		
+		int consecutivo;
+		
+		TipoDocumento tipoDocumento=documento.getTipoDocumento();
+		if(tipoDocumento.isIndividual()) {
+			String hql="FROM Documento WHERE tipoDocumento = ? AND usuario = ?";
+			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento.getId()).setParameter(2,documento.getUsuario().getCedula()).getResultList().size();
+		}else {
+			String hql="FROM Documento WHERE tipoDocumento = ?";
+			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento.getId()).getResultList().size();
+		}
+		
+		documento.setConsecutivo(consecutivo+1);
 		entityManager.merge(documento);
 	}
 
@@ -45,6 +58,7 @@ public class DocumentoDaoImpl implements DocumentoDao{
 		doc.setTipoDocumento(documento.getTipoDocumento());
 		doc.setNombre(documento.getNombre());
 		doc.setFecha(documento.getFecha());
+		doc.setConsecutivo(documento.getConsecutivo());
 		entityManager.flush();
 		
 		return doc;

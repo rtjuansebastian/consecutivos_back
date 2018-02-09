@@ -23,16 +23,20 @@ public class TipoDocumento implements Serializable {
 	
 	@Column(name="siglas")
 	private String siglas;
+	
+	@Column(name="individual")
+	private boolean individual;
 
 	public TipoDocumento() {
 
 	}
 
-	public TipoDocumento(int id, String nombre, String siglas) {
+	public TipoDocumento(int id, String nombre, String siglas, boolean individual) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.siglas = siglas;
+		this.individual = individual;
 	}
 
 	public int getId() {
@@ -57,6 +61,14 @@ public class TipoDocumento implements Serializable {
 
 	public void setSiglas(String siglas) {
 		this.siglas = siglas;
-	}	
+	}
+
+	public boolean isIndividual() {
+		return individual;
+	}
+
+	public void setIndividual(boolean individual) {
+		this.individual = individual;
+	}		
 		
 }
