@@ -33,7 +33,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	@Override
 	public List<Usuario> read() {
 
-		String hql="FROM Usuario ORDER BY id";
+		String hql="FROM Usuario ORDER BY nombre";
 		return (List<Usuario>) entityManager.createQuery(hql).getResultList();
 	}
 
