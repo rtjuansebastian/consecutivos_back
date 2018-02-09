@@ -32,10 +32,10 @@ public class DocumentoDaoImpl implements DocumentoDao{
 		TipoDocumento tipoDocumento=documento.getTipoDocumento();
 		if(tipoDocumento.isIndividual()) {
 			String hql="FROM Documento WHERE tipoDocumento = ? AND usuario = ?";
-			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento.getId()).setParameter(2,documento.getUsuario().getCedula()).getResultList().size();
+			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento).setParameter(2,documento.getUsuario().getCedula()).getResultList().size();
 		}else {
 			String hql="FROM Documento WHERE tipoDocumento = ?";
-			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento.getId()).getResultList().size();
+			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento).getResultList().size();
 		}
 		
 		documento.setConsecutivo(consecutivo+1);
