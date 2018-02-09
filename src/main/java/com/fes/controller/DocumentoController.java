@@ -34,7 +34,7 @@ public class DocumentoController {
 		return new ResponseEntity<Documento>(documento,HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://159.89.94.78:3000")
 	@PostMapping("documento")
 	public ResponseEntity<Void> create(@RequestBody Documento documento, UriComponentsBuilder builder){
 		
@@ -48,7 +48,7 @@ public class DocumentoController {
 		return new ResponseEntity<Void>(headers,HttpStatus.CREATED);		
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://159.89.94.78:3000")
 	@GetMapping("documentos")
 	public ResponseEntity<List<Documento>> read(){
 		List<Documento> list=documentoService.read();
