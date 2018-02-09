@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fes.entity.Documento;
 import com.fes.entity.TipoDocumento;
+import com.fes.entity.Usuario;
 
 @Transactional
 @Repository
@@ -28,14 +30,17 @@ public class DocumentoDaoImpl implements DocumentoDao{
 	public void create(Documento documento) {
 		
 		int consecutivo;
+		String hqlTipoDocumento="FROM TipoDocumento WHERE id = ?";
+		TipoDocumento tipoDocumento=(TipoDocumento)entityManager.createQuery(hqlTipoDocumento).setParameter(1,documento.getTipoDocumento().getId()).getSingleResult();
+		String hqlUsuario="FROM Usuario WHERE cedula = ?";
+		Usuario usuario= (Usuario)entityManager.createQuery(hqlUsuario).setParameter(1,documento.getUsuario().getCedula()).getSingleResult();
 		
-		TipoDocumento tipoDocumento=documento.getTipoDocumento();
 		if(tipoDocumento.isIndividual()) {
 			String hql="FROM Documento WHERE tipoDocumento = ? AND usuario = ?";
-			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento).setParameter(2,documento.getUsuario().getCedula()).getResultList().size();
+			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento).setParameter(2,usuario).getResultList().size();
 		}else {
-			String hql="FROM Documento WHERE tipoDocumento = ?";
-			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento).getResultList().size();
+			String hql="SELECT doc.id FROM Documento AS doc INNER JOIN doc.usuario AS us WHERE doc.tipoDocumento= ? AND us.equipo= ? GROUP BY doc.id";
+			consecutivo=entityManager.createQuery(hql).setParameter(1,tipoDocumento).setParameter(2, usuario.getEquipo()).getResultList().size();
 		}
 		
 		documento.setConsecutivo(consecutivo+1);
