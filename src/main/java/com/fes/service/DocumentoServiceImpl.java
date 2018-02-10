@@ -10,7 +10,7 @@ import com.fes.entity.Documento;
 
 @Service
 public class DocumentoServiceImpl implements DocumentoService {
-	
+
 	@Autowired
 	private DocumentoDao documentoDao;
 
@@ -23,29 +23,25 @@ public class DocumentoServiceImpl implements DocumentoService {
 	@Override
 	public boolean create(Documento documento) {
 
-		if (documentoDao.exist(documento.getNombre())) {
-			return false;
-		} else {
-			documentoDao.create(documento);
-			return true;
-		}
+		documentoDao.create(documento);
+		return true;
 	}
 
 	@Override
 	public List<Documento> read() {
-		
+
 		return documentoDao.read();
 	}
 
 	@Override
 	public Documento update(Documento documento) {
-		
+
 		return documentoDao.update(documento);
 	}
 
 	@Override
 	public void delete(int id) {
-		
+
 		documentoDao.delete(id);
 	}
 
