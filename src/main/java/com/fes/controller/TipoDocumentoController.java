@@ -55,6 +55,7 @@ public class TipoDocumentoController {
 		return new ResponseEntity<List<TipoDocumento>>(list, HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PutMapping("tipoDocumento")
 	public ResponseEntity<TipoDocumento> update(@RequestBody TipoDocumento tipoDocumento){
 		

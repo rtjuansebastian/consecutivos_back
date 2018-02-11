@@ -55,6 +55,7 @@ public class DocumentoController {
 		return new ResponseEntity<List<Documento>>(list, HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PutMapping("documento")
 	public ResponseEntity<Documento> update(@RequestBody Documento documento){
 		
