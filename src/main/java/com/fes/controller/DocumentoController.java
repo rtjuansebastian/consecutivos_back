@@ -1,5 +1,6 @@
 package com.fes.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class DocumentoController {
 	@PostMapping("documento")
 	public ResponseEntity<Void> create(@RequestBody Documento documento, UriComponentsBuilder builder){
 		
+		Date fecha=documento.getFecha();
+		fecha.setDate(fecha.getDate()+1);
+		documento.setFecha(fecha);
 		boolean flag=documentoService.create(documento);
 		if(flag==false) {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -63,6 +67,7 @@ public class DocumentoController {
 		return new ResponseEntity<Documento>(documento, HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping("documento/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id){
 		
