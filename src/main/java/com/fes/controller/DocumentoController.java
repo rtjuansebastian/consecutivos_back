@@ -35,7 +35,7 @@ public class DocumentoController {
 		return new ResponseEntity<Documento>(documento,HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://159.89.94.78:3000")
+	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
 	@PostMapping("documento")
 	public ResponseEntity<Void> create(@RequestBody Documento documento, UriComponentsBuilder builder){
 		
@@ -52,14 +52,14 @@ public class DocumentoController {
 		return new ResponseEntity<Void>(headers,HttpStatus.CREATED);		
 	}
 	
-	@CrossOrigin(origins = "http://159.89.94.78:3000")
+	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
 	@GetMapping("documentos")
 	public ResponseEntity<List<Documento>> read(){
 		List<Documento> list=documentoService.read();
 		return new ResponseEntity<List<Documento>>(list, HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://159.89.94.78:3000")
+	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
 	@PutMapping("documento")
 	public ResponseEntity<Documento> update(@RequestBody Documento documento){
 		
@@ -67,7 +67,7 @@ public class DocumentoController {
 		return new ResponseEntity<Documento>(documento, HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://159.89.94.78:3000")
+	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
 	@DeleteMapping("documento/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id){
 		
