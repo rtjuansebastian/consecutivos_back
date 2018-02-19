@@ -8,7 +8,7 @@ public interface DocumentoDao {
 	
 	Documento find(int id);
 	
-	void create(Documento documento);
+	Documento create(Documento documento);
 	
 	List<Documento> read();
 	

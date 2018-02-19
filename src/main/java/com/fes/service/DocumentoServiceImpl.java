@@ -21,10 +21,10 @@ public class DocumentoServiceImpl implements DocumentoService {
 	}
 
 	@Override
-	public boolean create(Documento documento) {
+	public Documento create(Documento documento) {
 
-		documentoDao.create(documento);
-		return true;
+		Documento doc=documentoDao.create(documento);
+		return doc;
 	}
 
 	@Override

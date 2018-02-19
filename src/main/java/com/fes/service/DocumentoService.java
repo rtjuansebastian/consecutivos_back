@@ -8,7 +8,7 @@ public interface DocumentoService {
 
 	Documento find(int id);
 	
-	boolean create(Documento documento);
+	Documento create(Documento documento);
 	
 	List<Documento> read();
 	

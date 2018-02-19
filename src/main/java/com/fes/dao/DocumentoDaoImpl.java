@@ -27,7 +27,7 @@ public class DocumentoDaoImpl implements DocumentoDao{
 	}
 
 	@Override
-	public void create(Documento documento) {
+	public Documento create(Documento documento) {
 		
 		int consecutivo;
 		String hqlTipoDocumento="FROM TipoDocumento WHERE id = ?";
@@ -45,6 +45,8 @@ public class DocumentoDaoImpl implements DocumentoDao{
 		
 		documento.setConsecutivo(consecutivo+1);
 		entityManager.merge(documento);
+		
+		return documento;
 	}
 
 	@SuppressWarnings("unchecked")

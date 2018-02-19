@@ -35,31 +35,31 @@ public class DocumentoController {
 		return new ResponseEntity<Documento>(documento,HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("documento")
-	public ResponseEntity<Void> create(@RequestBody Documento documento, UriComponentsBuilder builder){
+	public ResponseEntity<Documento> create(@RequestBody Documento documento, UriComponentsBuilder builder){
 		
 		Date fecha=documento.getFecha();
 		fecha.setDate(fecha.getDate()+1);
 		documento.setFecha(fecha);
-		boolean flag=documentoService.create(documento);
-		if(flag==false) {
+		Documento doc=documentoService.create(documento);
+		/*if(flag==false) {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-		}
+		}*/
 		
 		HttpHeaders headers= new HttpHeaders();
 		headers.setLocation(builder.path("documento/{id}").buildAndExpand(documento.getId()).toUri());			
-		return new ResponseEntity<Void>(headers,HttpStatus.CREATED);		
+		return new ResponseEntity<Documento>(doc,HttpStatus.CREATED);		
 	}
 	
-	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("documentos")
 	public ResponseEntity<List<Documento>> read(){
 		List<Documento> list=documentoService.read();
 		return new ResponseEntity<List<Documento>>(list, HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PutMapping("documento")
 	public ResponseEntity<Documento> update(@RequestBody Documento documento){
 		
@@ -67,7 +67,7 @@ public class DocumentoController {
 		return new ResponseEntity<Documento>(documento, HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
+	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping("documento/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id){
 		
