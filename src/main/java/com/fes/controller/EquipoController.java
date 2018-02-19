@@ -48,7 +48,7 @@ public class EquipoController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
 	@GetMapping("equipos")
 	public ResponseEntity<List<Equipo>> read() {
 		

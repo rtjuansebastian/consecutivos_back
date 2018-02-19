@@ -47,7 +47,7 @@ public class UsuarioController {
 		return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
 	@GetMapping("usuarios")
 	public ResponseEntity<List<Usuario>> read(){
 		

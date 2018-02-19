@@ -47,7 +47,7 @@ public class TipoDocumentoController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);		
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
 	@GetMapping("tiposDocumentos")
 	public ResponseEntity<List<TipoDocumento>> read(){
 		
@@ -55,7 +55,7 @@ public class TipoDocumentoController {
 		return new ResponseEntity<List<TipoDocumento>>(list, HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://consecutivos.brechadigitalregional.com")
 	@PutMapping("tipoDocumento")
 	public ResponseEntity<TipoDocumento> update(@RequestBody TipoDocumento tipoDocumento){
 		
