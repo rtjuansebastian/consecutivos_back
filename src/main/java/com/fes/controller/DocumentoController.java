@@ -39,9 +39,6 @@ public class DocumentoController {
 	@PostMapping("documento")
 	public ResponseEntity<Documento> create(@RequestBody Documento documento, UriComponentsBuilder builder){
 		
-		Date fecha=documento.getFecha();
-		fecha.setDate(fecha.getDate()+1);
-		documento.setFecha(fecha);
 		Documento doc=documentoService.create(documento);
 		/*if(flag==false) {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
