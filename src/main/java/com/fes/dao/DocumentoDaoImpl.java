@@ -53,7 +53,7 @@ public class DocumentoDaoImpl implements DocumentoDao{
 	@Override
 	public List<Documento> read() {
 
-		String hql="FROM Documento ORDER BY fecha DESC";
+		String hql="FROM Documento ORDER BY id DESC";
 		return (List<Documento>) entityManager.createQuery(hql).getResultList();
 	}
 
