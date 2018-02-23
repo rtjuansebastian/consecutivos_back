@@ -1,5 +1,6 @@
 package com.fes.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -29,18 +30,23 @@ public class DocumentoDaoImpl implements DocumentoDao{
 	@Override
 	public Documento create(Documento documento) {
 		
-		int consecutivo;
+		int consecutivo=0;
+		List resultQuery=new ArrayList();
 		String hqlTipoDocumento="FROM TipoDocumento WHERE id = ?";
 		TipoDocumento tipoDocumento=(TipoDocumento)entityManager.createQuery(hqlTipoDocumento).setParameter(1,documento.getTipoDocumento().getId()).getSingleResult();
 		String hqlUsuario="FROM Usuario WHERE cedula = ?";
 		Usuario usuario= (Usuario)entityManager.createQuery(hqlUsuario).setParameter(1,documento.getUsuario().getCedula()).getSingleResult();
 		
 		if(tipoDocumento.isIndividual()) {
-			String hql="FROM Documento WHERE tipoDocumento = ? AND usuario = ?";
-			consecutivo=entityManager.createQuery(hql).setParameter(1, tipoDocumento).setParameter(2,usuario).getResultList().size();
+			String hql="SELECT max(consecutivo) FROM Documento WHERE tipoDocumento = ? AND usuario = ?";
+			resultQuery= entityManager.createQuery(hql).setParameter(1, tipoDocumento).setParameter(2,usuario).getResultList();
 		}else {
-			String hql="SELECT doc.id FROM Documento AS doc INNER JOIN doc.usuario AS us WHERE doc.tipoDocumento= ? AND us.equipo= ? GROUP BY doc.id";
-			consecutivo=entityManager.createQuery(hql).setParameter(1,tipoDocumento).setParameter(2, usuario.getEquipo()).getResultList().size();
+			String hql="SELECT max(doc.consecutivo) FROM Documento AS doc INNER JOIN doc.usuario AS us WHERE doc.tipoDocumento= ? AND us.equipo= ?";
+			resultQuery= entityManager.createQuery(hql).setParameter(1,tipoDocumento).setParameter(2, usuario.getEquipo()).getResultList();
+		}		
+		
+		if(resultQuery.get(0)!=null){
+			consecutivo = (int) resultQuery.get(0);
 		}
 		
 		documento.setConsecutivo(consecutivo+1);
